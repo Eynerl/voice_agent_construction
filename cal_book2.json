@@ -1,0 +1,118 @@
+{
+  "type": "webhook",
+  "name": "cal_book2",
+  "description": "This tool books a meeting in the calendar once a time is agreed.",
+  "disable_interruptions": false,
+  "force_pre_tool_speech": "auto",
+  "assignments": [],
+  "tool_call_sound": null,
+  "tool_call_sound_behavior": "auto",
+  "execution_mode": "immediate",
+  "api_schema": {
+    "url": "https://api.cal.com/v2/bookings",
+    "method": "POST",
+    "path_params_schema": [],
+    "query_params_schema": [],
+    "request_body_schema": {
+      "id": "body",
+      "type": "object",
+      "description": "Add information about the meeting based on the conversation.",
+      "properties": [
+        {
+          "id": "start",
+          "type": "string",
+          "value_type": "llm_prompt",
+          "description": "The start time of the booking in ISO 8601 format in UTC timezone, e.g. ‘2024-08-13T09:00:00Z’.",
+          "dynamic_variable": "",
+          "constant_value": "",
+          "enum": null,
+          "is_system_provided": false,
+          "required": true
+        },
+        {
+          "id": "attendee",
+          "type": "object",
+          "description": "The attendee's details. You must collect these fields from the user.",
+          "properties": [
+            {
+              "id": "timeZone",
+              "type": "string",
+              "value_type": "llm_prompt",
+              "description": "The caller's timezone. Should be in the format of 'Continent/City' like 'America/Toronto'",
+              "dynamic_variable": "",
+              "constant_value": "",
+              "enum": null,
+              "is_system_provided": false,
+              "required": true
+            },
+            {
+              "id": "email",
+              "type": "string",
+              "value_type": "llm_prompt",
+              "description": "The email address of the person booking the meeting.",
+              "dynamic_variable": "",
+              "constant_value": "",
+              "enum": null,
+              "is_system_provided": false,
+              "required": true
+            },
+            {
+              "id": "name",
+              "type": "string",
+              "value_type": "llm_prompt",
+              "description": "The full name of the person booking the meeting.",
+              "dynamic_variable": "",
+              "constant_value": "",
+              "enum": null,
+              "is_system_provided": false,
+              "required": true
+            }
+          ],
+          "required": true,
+          "value_type": "llm_prompt"
+        },
+        {
+          "id": "location",
+          "type": "string",
+          "value_type": "constant",
+          "description": "",
+          "dynamic_variable": "",
+          "constant_value": "google-meet",
+          "enum": null,
+          "is_system_provided": false,
+          "required": true
+        },
+        {
+          "id": "eventTypeId",
+          "type": "number",
+          "value_type": "constant",
+          "description": "",
+          "dynamic_variable": "",
+          "constant_value": "3981971",
+          "enum": null,
+          "is_system_provided": false,
+          "required": true
+        }
+      ],
+      "required": false,
+      "value_type": "llm_prompt"
+    },
+    "request_headers": [
+      {
+        "type": "value",
+        "name": "cal-api-version",
+        "value": "2024-08-13"
+      },
+      {
+        "type": "secret",
+        "name": "Authorization",
+        "secret_id": "o6EcTNpLLkZvh7y62RNa"
+      }
+    ],
+    "auth_connection": null
+  },
+  "response_timeout_secs": 20,
+  "dynamic_variables": {
+    "dynamic_variable_placeholders": {}
+  }
+}

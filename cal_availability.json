@@ -1,0 +1,69 @@
+{
+  "type": "webhook",
+  "name": "cal_availability",
+  "description": "This tool is to check if a particular time slot is available in the calendar.",
+  "disable_interruptions": false,
+  "force_pre_tool_speech": "auto",
+  "assignments": [],
+  "tool_call_sound": null,
+  "tool_call_sound_behavior": "auto",
+  "execution_mode": "immediate",
+  "api_schema": {
+    "url": "https://api.cal.com/v2/slots",
+    "method": "GET",
+    "path_params_schema": [],
+    "query_params_schema": [
+      {
+        "id": "end",
+        "type": "string",
+        "value_type": "llm_prompt",
+        "description": "End date/time based on the user's America/Toronto local time, converted to \nUTC (handling Daylight Savings Time automatically), until which to fetch slots. Output must be an ISO8601 UTC timestamp, e.g. ‘2024-08-13T17:00:00Z’.\n",
+        "dynamic_variable": "",
+        "constant_value": "",
+        "enum": null,
+        "is_system_provided": false,
+        "required": true
+      },
+      {
+        "id": "start",
+        "type": "string",
+        "value_type": "llm_prompt",
+        "description": "Users America/Toronto time slot start converted to start date/time (UTC) from which to fetch slots, e.g. ‘2024-08-13T09:00:00Z’.",
+        "dynamic_variable": "",
+        "constant_value": "",
+        "enum": null,
+        "is_system_provided": false,
+        "required": true
+      },
+      {
+        "id": "eventTypeId",
+        "type": "string",
+        "value_type": "llm_prompt",
+        "description": "The ID of the event type that is booked. Return 3981971",
+        "dynamic_variable": "",
+        "constant_value": "",
+        "enum": null,
+        "is_system_provided": false,
+        "required": true
+      }
+    ],
+    "request_body_schema": null,
+    "request_headers": [
+      {
+        "type": "value",
+        "name": "cal-api-version",
+        "value": "2024-09-04"
+      },
+      {
+        "type": "secret",
+        "name": "Authorization",
+        "secret_id": "o6EcTNpLLkZvh7y62RNa"
+      }
+    ],
+    "auth_connection": null
+  },
+  "response_timeout_secs": 20,
+  "dynamic_variables": {
+    "dynamic_variable_placeholders": {}
+  }
+}
